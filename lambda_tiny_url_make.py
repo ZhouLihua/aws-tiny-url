@@ -39,5 +39,4 @@ def lambda_handler(event, context):
             'shortUrl': shortUrl,
             "id": uid
             }
-        
     }
