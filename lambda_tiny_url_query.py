@@ -3,6 +3,7 @@ import boto3
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('myTinyURL-db')
 
+ENDPOINT="https://7rqjxtzse9.execute-api.us-east-1.amazonaws.com/prod"
 
 # opposite of generate_short_uri
 def decode_short_url(short_url):
@@ -16,18 +17,20 @@ def decode_short_url(short_url):
 
 
 def lambda_handler(event, context):
-    shortUrl = event.get("shortUrl")
+    queryParams = event.get("pathParameters")
+    shortUrl = queryParams.get("shortUrl")
     uuid = decode_short_url(shortUrl)
     response = table.get_item(Key={'id': uuid})
     item = response.get("Item", None)
     if item:
-        item["shortUrl"] = shortUrl
         return {
-            'statusCode': 200,
-            'body': item
+            'statusCode': 301,
+            'headers':{
+                "Location": item.get("longUrl")
+            }
         }
     else:
         return {
             'statusCode': 404,
-            'body': "item not found"
+            'body': "can not found longurl for %s" % shortUrl
         }

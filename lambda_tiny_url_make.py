@@ -1,5 +1,6 @@
 import boto3
 import time
+import json
 
 
 # db schema
@@ -8,6 +9,8 @@ import time
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('myTinyURL-db')
 
+
+ENDPOINT="https://7rqjxtzse9.execute-api.us-east-1.amazonaws.com/prod/"
 
 # for each make request, we should assume a unique id for it, and
 # generate a short url for it. base62 algoritm
@@ -22,7 +25,10 @@ def generate_short_url(uuid):
 
 
 def lambda_handler(event, context):
-    longUrl = event.get("longUrl")
+    print event
+    body = event.get("body")
+    bodyJson = json.loads(body)
+    longUrl = bodyJson.get("longUrl")
     uid = int(time.time())
     shortUrl = generate_short_url(uid)
 
@@ -35,8 +41,5 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': {
-            'shortUrl': shortUrl,
-            "id": uid
-            }
+        'body': ENDPOINT + shortUrl
     }
