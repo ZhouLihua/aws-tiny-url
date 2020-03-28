@@ -20,8 +20,8 @@ def lambda_handler(event, context):
     uuid = decode_short_url(shortUrl)
     response = table.get_item(Key={'id': uuid})
     item = response.get("Item", None)
-    item["shortUrl"] = shortUrl
     if item:
+        item["shortUrl"] = shortUrl
         return {
             'statusCode': 200,
             'body': item
