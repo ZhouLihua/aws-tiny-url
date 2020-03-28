@@ -39,7 +39,13 @@ def lambda_handler(event, context):
         }
     )
 
+    response = {
+        "shortUrl": ENDPOINT + shortUrl
+    }
     return {
         'statusCode': 200,
-        'body': ENDPOINT + shortUrl
+        'headers': {
+            "Access-Control-Allow-Origin": "*"
+        },
+        'body': json.dumps(response)
     }

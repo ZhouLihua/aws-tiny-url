@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="lib/apigClient.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, myTiny Url!</h1>
+    <label for="shortUrl">Full URL:</label>
+    <input type="text" id="shortUrl" name="shortUrl" size="128">
+    <button id="shortButton">Shorten！</button>
+    <br>
+    <br>
+    <p>Tiny URL:<a id="tiny-url"></a></p>
+    <!-- <a id="tiny-url"></a> -->
+
+    <script>
+        $(document).ready(
+            $("#shortButton").click(
+                function shortUrlFunc() {
+                    var gateway="https://7rqjxtzse9.execute-api.us-east-1.amazonaws.com/prod";
+                    var url=$("#shortUrl").val();
+                    $.ajax({
+                        url: gateway,
+                        type: "POST",
+                        crossDomain: true,
+                        data: JSON.stringify({"longUrl": url}),
+                        headers: {
+                            "accept": "application/json",
+                            "Access-Control-Allow-Origin":"*",
+                            "content-type": "application/json"
+                        },
+                        success: function (data, status) {
+                            console.log(data);
+                            $("#tiny-url").attr('href', data.shortUrl);
+                            $("#tiny-url").text(data.shortUrl);
+                        },
+                        error: function (reason, status) {
+                            console.log(reason);
+                        }
+                    });
+                }
+            )
+        )
+    </script>
+</body>
+</html>
