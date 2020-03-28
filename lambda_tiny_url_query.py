@@ -25,7 +25,7 @@ def lambda_handler(event, context):
     if item:
         return {
             'statusCode': 301,
-            'headers':{
+            'headers': {
                 "Location": item.get("longUrl")
             }
         }
