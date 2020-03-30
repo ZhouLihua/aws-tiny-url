@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: my tiny url service
+Resources:
+  myTinyUrlmakeStack:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_tiny_url_make.lambda_handler
+      Runtime: python2.7
+      CodeUri: ./
+      Events:
+        myTinyUrl:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+  myTinyUrlQueryStack:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_tiny_url_query.lambda_handler
+      Runtime: python2.7
+      CodeUri: ./
+      Events:
+        myTinyUrl:
+          Type: Api
+          Properties:
+            Path: /{shortUrl}
+            Method: GET
