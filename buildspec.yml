@@ -36,8 +36,8 @@ phases:
       #- pylint lambda_tiny_url_make.py lambda_tiny_url_query.py
   post_build:
     commands:
-      - zip lambda_tiny_url_make.zip lambda_tiny_url_make.py
-      - zip lambda_tiny_url_query.zip lambda_tiny_url_query.py
+      - zip lambda_tiny_url_make.zip lambda_tiny_url_make.py appspec.yml
+      - zip lambda_tiny_url_query.zip lambda_tiny_url_query.py appspec.yml
 #reports:
   #report-name-or-arn:
     #files:
