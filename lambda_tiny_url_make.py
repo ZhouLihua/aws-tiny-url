@@ -25,7 +25,6 @@ def generate_short_url(uuid):
 
 
 def lambda_handler(event, context):
-    print event
     body = event.get("body")
     bodyJson = json.loads(body)
     longUrl = bodyJson.get("longUrl")
