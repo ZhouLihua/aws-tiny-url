@@ -36,8 +36,7 @@ phases:
       #- pylint lambda_tiny_url_make.py lambda_tiny_url_query.py
   post_build:
     commands:
-      - export BUCKET=cloudformationtemplate-zhoulihua
-      - aws cloudformation package --template-file stack-template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
+      - aws cloudformation package --template-file stack-template.yaml --s3-bucket cloudformationtemplate-zhoulihua --output-template-file outputtemplate.yml
 #reports:
   #report-name-or-arn:
     #files:
