@@ -9,7 +9,7 @@ Resources:
       Runtime: python2.7
       CodeUri: ./
       Events:
-        myTinyUrl:
+        Clone from myTinyUrl:
           Type: Api
           Properties:
             Path: /
@@ -21,7 +21,7 @@ Resources:
       Runtime: python2.7
       CodeUri: ./
       Events:
-        myTinyUrl:
+        Clone from myTinyUrl:
           Type: Api
           Properties:
             Path: /{shortUrl}
