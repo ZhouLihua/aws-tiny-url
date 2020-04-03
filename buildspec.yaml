@@ -36,8 +36,8 @@ phases:
       #- pylint lambda_tiny_url_make.py lambda_tiny_url_query.py
   post_build:
     commands:
-      - zip lambda_tiny_url_make.zip lambda_tiny_url_make.py appspec.yaml
-      - zip lambda_tiny_url_query.zip lambda_tiny_url_query.py appspec.yaml
+      - export BUCKET=cloudformationtemplate-zhoulihua
+      - aws cloudformation package --template-file stack-template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
 #reports:
   #report-name-or-arn:
     #files:
@@ -47,9 +47,10 @@ phases:
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
 artifacts:
+  type: zip
   files:
-    - lambda_tiny_url_make.zip
-    - appspec.yaml
+    - template.yml
+    - outputtemplate.yml
   #name: $(date +%Y-%m-%d)
   #discard-paths: yes
   #base-directory: location

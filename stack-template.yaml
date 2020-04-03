@@ -8,21 +8,10 @@ Resources:
       Handler: lambda_tiny_url_make.lambda_handler
       Runtime: python2.7
       CodeUri: ./
-      Events:
-        Clone from myTinyUrl:
-          Type: Api
-          Properties:
-            Path: /
-            Method: POST
+
   myTinyUrlQueryStack:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_tiny_url_query.lambda_handler
       Runtime: python2.7
       CodeUri: ./
-      Events:
-        Clone from myTinyUrl:
-          Type: Api
-          Properties:
-            Path: /{shortUrl}
-            Method: GET
