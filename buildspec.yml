@@ -36,7 +36,7 @@ phases:
       #- pylint lambda_tiny_url_make.py lambda_tiny_url_query.py
   post_build:
     commands:
-      - aws cloudformation package --template-file stack-template.yaml --s3-bucket cloudformationtemplate-zhoulihua --output-template-file outputtemplate.yml
+      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
 #reports:
   #report-name-or-arn:
     #files:
@@ -48,8 +48,7 @@ phases:
 artifacts:
   type: zip
   files:
-    - template.yml
-    - outputtemplate.yml
+    - template-export.yml
   #name: $(date +%Y-%m-%d)
   #discard-paths: yes
   #base-directory: location
