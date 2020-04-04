@@ -5,13 +5,14 @@ Resources:
   myTinyUrlmakeStack:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: lambda_tiny_url_make.lambda_handler
-      Runtime: python2.7
       CodeUri: ./
+      Handler: handlers/lambda_tiny_url_make.lambda_handler
+      Runtime: python2.7
+
 
   myTinyUrlQueryStack:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: lambda_tiny_url_query.lambda_handler
-      Runtime: python2.7
       CodeUri: ./
+      Handler: handlers/lambda_tiny_url_query.lambda_handler
+      Runtime: python2.7
